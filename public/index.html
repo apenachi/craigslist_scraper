@@ -49,8 +49,9 @@
 						<div class="item active">
 							<div class="carousel-content">
 								<div>
-									<h4>Title</h4>
-									<a>Sapiente, ducimus, voluptas, mollitia voluptatibus</a>
+									<h3>Scrapping Craiglist Job Posting</h3>
+									<h4>newjersey.craigslist.org</h4>
+									<a>Please click "Scrape" to start</a>
 								</div>
 							</div>
 						</div>
@@ -114,11 +115,12 @@
  -->	    </tr>
 				</thead>
 				<tbody id="notes">
-						<tr>
-							<td>this comments can be super long so it will wrap around the extra text  1</td>
-							<td>Carter</td>
+					<tr>
+						<td>If you add a Note to the job posting above it will be shown down here</td>
+<!-- 							<td>Carter</td>
 							<td><button class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i> Delete</button></td>
-						</tr>
+ -->						
+ 					</tr>
 				</tbody>
 			</table>			
 		</div>
@@ -129,6 +131,7 @@
 
 	$('.left').on('click', function(){
 		console.log('.left');
+		$('#notes').empty();
 		var active = $('.item.active').attr('data-id');
 		console.log(active);
 		$.ajax({
@@ -136,7 +139,7 @@
 			url: "/JobPostings/" + active,
 		})
 			.done(function(note) {
-				$('#notes').empty();
+				
 				var tr = $('<tr>')
 				tr.append('<td>' + note.title + '</td>');
 				tr.append('<td>' + note.body + '</td>');
@@ -144,7 +147,6 @@
 				$('#notes').append(tr);
 			})
 	})
-
 
 	$('#save').on('click', function(){
 		console.log('note => ', $('#note').val());
@@ -163,8 +165,19 @@
 		$('#note').val("");
 	})
 
+	$('#scrape').on('click', function() { 
+		$.ajax({
+			method: "GET",
+			url: "/scrape",
+		})
+			.done(function(result) {
+				console.log('scrape ' + result);
+		})
+		populate();
+		$(this).hide();
+	})
 
-	$('#scrape').on('click', function() {
+	function populate() {
 		$.getJSON('/JobPostings', function(jobPostings) {
 			console.log('/jobPostings');
 			jobPostings.forEach(function(job, i) {
@@ -190,8 +203,8 @@
 				$('.carousel-inner').append(item);
 				
 			})
-		})		
-	})
+		})
+	}
 
 	</script>
 </body>

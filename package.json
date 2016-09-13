@@ -5,9 +5,9 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "start": "public/index.html"
   },
-  "author": "",
+  "author": "apenachi@yahoo.com",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.15.0",
@@ -16,5 +16,9 @@
     "mongoose": "^4.4.6",
     "morgan": "^1.7.0",
     "request": "^2.69.0"
-  }
+  },
+  "engines":{
+    "node": "6.2.2",
+    "npm": "3.10.5"
+  }  
 }

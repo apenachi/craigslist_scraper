@@ -4,10 +4,10 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var request = require('request'); 
 var cheerio = require('cheerio');
+var PORT = process.env.PORT || 8080;
 
-app.use(bodyParser.urlencoded({
-	extended: false
-}));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(express.static('public'));
 
@@ -41,7 +41,7 @@ app.get('/', function(req, res) {
 // 	res.send("Scrape Complete");
 // });
 
-app.get('/jobs', function(req, res) {
+app.get('/scrape', function(req, res) {
 	request('https://newjersey.craigslist.org/search/jjj?query=web+developer', function (error, response, html) {
 		var $ = cheerio.load(html);
 		$('a.hdrlnk').each(function(i, element){
@@ -59,14 +59,11 @@ app.get('/jobs', function(req, res) {
 			});
 		});
 	});
-	res.redirect('/');
+	res.send('complete');
 });
 
-// this will get the JobPostings we scraped from the mongoDB
 app.get('/JobPostings', function(req, res){
-	// grab every doc in the JobPostings array
 	JobPosting.find({}, function(err, doc){
-		// log any errors
 		if (err){
 			console.log(err);
 		} else {
@@ -75,19 +72,11 @@ app.get('/JobPostings', function(req, res){
 	});
 });
 
-
-// grab an JobPosting by it's ObjectId
 app.get('/JobPostings/:id', function(req, res){
-	// using the id passed in the id parameter, 
-	// prepare a query that finds the matching one in our db...
 
-	console.log('getting notes', doc);
 	JobPosting.findOne({'_id': req.params.id})
-	// and populate all of the notes associated with it.
 	.populate('note')
-	// now, execute our query
 	.exec(function(err, doc){
-		// log any errors
 		console.log('getting notes', doc);
 		if (err){
 			console.log(err);
@@ -100,9 +89,7 @@ app.get('/JobPostings/:id', function(req, res){
 app.post('/JobPostings/:id', function(req, res){
 
 	var newNote = new Note(req.body);
-
 	console.log(newNote);
-
 	newNote.save(function(err, doc){
 		if(err){
 			console.log(err);
@@ -119,7 +106,6 @@ app.post('/JobPostings/:id', function(req, res){
 	});
 });
 
-// listen on port 3000
-app.listen(3000, function() {
-	console.log('App running on port 3000!');
+app.listen(PORT, function() {
+	console.log('App running on port 8080!');
 });

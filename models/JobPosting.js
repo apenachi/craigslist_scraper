@@ -11,8 +11,8 @@ var JobPostingSchema = new Schema({
 		required:true
 	},
 	note: {
-			type: Schema.Types.ObjectId,
-			ref: 'Note'
+		type: Schema.Types.ObjectId,
+		ref: 'Note'
 	}
 });
 
