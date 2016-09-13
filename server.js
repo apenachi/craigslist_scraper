@@ -59,7 +59,7 @@ app.get('/scrape', function(req, res) {
 			});
 		});
 	});
-	res.send('complete');
+	res.redirect('/');
 });
 
 app.get('/JobPostings', function(req, res){

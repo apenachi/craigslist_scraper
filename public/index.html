@@ -51,7 +51,7 @@
 								<div>
 									<h3>Scrapping Craiglist Job Posting</h3>
 									<h4>newjersey.craigslist.org</h4>
-									<a>Please click "Scrape" to start</a>
+									<a href="/scrape">Click to scrape</a>
 								</div>
 							</div>
 						</div>
@@ -165,19 +165,7 @@
 		$('#note').val("");
 	})
 
-	$('#scrape').on('click', function() { 
-		$.ajax({
-			method: "GET",
-			url: "/scrape",
-		})
-			.done(function(result) {
-				console.log('scrape ' + result);
-		})
-		populate();
-		$(this).hide();
-	})
-
-	function populate() {
+	$('#scrape').on('click', function() {
 		$.getJSON('/JobPostings', function(jobPostings) {
 			console.log('/jobPostings');
 			jobPostings.forEach(function(job, i) {
@@ -203,8 +191,8 @@
 				$('.carousel-inner').append(item);
 				
 			})
-		})
-	}
+		})		
+	})
 
 	</script>
 </body>
