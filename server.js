@@ -11,7 +11,9 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(express.static('public'));
 
-mongoose.connect('mongodb://localhost/craigslist-scraper');
+// mongoose.connect('mongodb://localhost/craigslist-scraper');
+
+mongoose.connect(process.env.MONGOLAB_CHARCOAL_URI);
 var db = mongoose.connection;
 
 db.on('error', function(err) {
