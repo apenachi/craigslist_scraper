@@ -13,7 +13,7 @@ app.use(express.static('public'));
 
 // mongoose.connect('mongodb://localhost/craigslist-scraper');
 
-mongoose.connect(process.env.MONGOLAB_CHARCOAL_URI);
+mongoose.connect(process.env.MONGODB_URI);
 var db = mongoose.connection;
 
 // db.on('error', function(err) {
