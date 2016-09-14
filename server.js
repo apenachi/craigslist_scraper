@@ -14,7 +14,7 @@ app.use(express.static('public'));
 // mongoose.connect('mongodb://localhost/craigslist-scraper');
 var dbUrl = process.env.MONGODB_URI 
 		|| 'mongodb://heroku_b8mzml2k:7evkgr8g85kjrh28nefeetm8g4@ds029426.mlab.com:29426/heroku_b8mzml2k'
-		|| 'http://localhost:1027'
+		|| 'mongodb://localhost/Craigslist_DB'
 		
 console.log(dbUrl);
 mongoose.connect(dbUrl, function() {
