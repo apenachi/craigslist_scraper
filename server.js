@@ -16,13 +16,13 @@ app.use(express.static('public'));
 mongoose.connect(process.env.MONGOLAB_CHARCOAL_URI);
 var db = mongoose.connection;
 
-db.on('error', function(err) {
-	console.log('Mongoose Error: ', err);
-});
+// db.on('error', function(err) {
+// 	console.log('Mongoose Error: ', err);
+// });
 
-db.once('open', function() {
-	console.log('Mongoose connection successful.');
-});
+// db.once('open', function() {
+// 	console.log('Mongoose connection successful.');
+// });
 
 var Note = require('./models/Note.js');
 var JobPosting = require('./models/JobPosting.js');
