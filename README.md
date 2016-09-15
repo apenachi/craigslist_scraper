@@ -36,13 +36,18 @@ Node app to allows you to add comments for job posting found in craigslist
 	  }
 	}
 
-# Heroku Deployment
-	1. var mongoUrl = process.env.MONGODB_URI || 'mongodb://heroku_b8mzml2k:7evkgr8g85kjrh28nefeetm8g4@ds029426.mlab.com:29426/heroku_b8mzml2k'
+# server.js
+	1. var mongoUrl = process.env.MONGODB_URI || 'mongodb://heroku_61f5839k:4dqgf4fjotb7bqmtomufevmg44@ds033116.mlab.com:33116/heroku_61f5839k'
 	2. var mongoDB = 'mongodb://' + mongoUrl + '/Craigslist_DB'
 	3. mongoose.connect(mongoDB, function(err) {});
 	4. var PORT = process.env.PORT || 8080;
 
+# heroku deploy
+	1. heroku create
+	2. git push heroku master
+	3. heroku addons:create mongolab
+	4. heroku config
+		=== serene-ravine-91404 Config Vars
+		MONGODB_URI: mongodb://heroku_61f5839k:4dqgf4fjotb7bqmtomufevmg44@ds033116.mlab.com:33116/heroku_61f5839k
+	5. Use MONGODB_URI as shown in server.js
 
-
-
-	
